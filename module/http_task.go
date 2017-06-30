@@ -39,7 +39,7 @@ func (ht *HttpTask) Run() {
 			if err != nil { //任务执行失败 ，level++
 				ht.SetLevel(ht.Id)
 				ht.Level++
-				if ht.Level >= 9 { //任务执行完成
+				if ht.Level >= 8 { //任务执行完成
 					ht.Final(ht.Id)
 					return
 				}

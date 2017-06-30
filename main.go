@@ -8,6 +8,7 @@ import (
 
 	. "git.ishopex.cn/matrix/lazy-notify/module"
 	"git.ishopex.cn/matrix/lazy-notify/schedule"
+	"github.com/robfig/cron"
 )
 
 func main() {
@@ -31,8 +32,9 @@ func main() {
 		T.Error("lazy-notfiy mongo option init failed:%s", err)
 		return
 	}
-
-	mo.CreateTask()
+	cronapp := cron.New()
+	cronapp.AddFunc("@every 10m", mo.CreateTask)
+	cronapp.Start()
 	err = WebServer("7788")
 	if err != nil {
 		T.Error("lazy-notfiy webserver init failed:%s", err)
